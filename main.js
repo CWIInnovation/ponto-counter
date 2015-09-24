@@ -1,6 +1,8 @@
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
-
+var Menu = require('menu');
+var Tray = require('tray');
+	
 // Report crashes to our server.
 require('crash-reporter').start();
 
@@ -21,8 +23,8 @@ app.on('window-all-closed', function() {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
-
+  mainWindow = new BrowserWindow({width: 800, height: 600});  
+  
   // and load the index.html of the app.
   mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
@@ -36,4 +38,17 @@ app.on('ready', function() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+  
+	var appIcon = null;
+	appIcon = new Tray('cwi.png');
+	  
+	var contextMenu = Menu.buildFromTemplate([
+		{ label: 'Item1', type: 'radio' },
+		{ label: 'Item2', type: 'radio' },
+		{ label: 'Item3', type: 'radio', checked: true },
+		{ label: 'Item4', type: 'radio' }
+	]);
+
+	appIcon.setToolTip('This is my application.');
+	appIcon.setContextMenu(contextMenu);
 });

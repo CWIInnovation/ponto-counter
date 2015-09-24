@@ -13,30 +13,27 @@ app.on('window-all-closed', function () {
     }
 });
 
-app.on('ready', function () {   
-    mainWindow = new BrowserWindow({ width: 500, height: 300 });    
-    mainWindow.loadUrl('file://' + __dirname + '/index.html');
-
-    //mainWindow.openDevTools();
-
-    mainWindow.on('closed', function () {
-        mainWindow = null;
-    });
-
+app.on('ready', function () {
+    criaJanelaPrincipal();    
     adicionaIconeDeTray();
 });
 
 function adicionaIconeDeTray() {
     var appIcon = new Tray('cwi.png');
+    appIcon.setToolTip('CWI Software');;
 
     appIcon.on('clicked', function () {
-        //inserir chamada da janela aqui
+        mainWindow.show();
+    });    
+}
+
+function criaJanelaPrincipal() {
+    mainWindow = new BrowserWindow({ width: 500, height: 300, show: false });
+    mainWindow.loadUrl('file://' + __dirname + '/index.html');
+
+    mainWindow.openDevTools();
+
+    mainWindow.on('closed', function () {
+        mainWindow = null;
     });
-
-    var contextMenu = Menu.buildFromTemplate([
-        { label: 'Item1' }
-    ]);
-
-    appIcon.setToolTip('CWI Software');
-    appIcon.setContextMenu(contextMenu);
 }

@@ -3,6 +3,7 @@ var BrowserWindow = require('browser-window');  // Module to create native brows
 var Menu = require('menu');
 var Tray = require('tray');
 var dialog = require('dialog');
+
 require('crash-reporter').start();
 
 var mainWindow = null;
@@ -17,7 +18,7 @@ app.on('ready', function () {
     criaJanelaPrincipal();    
     adicionaIconeDeTray();
 
-    mainWindow.openDevTools();
+    //mainWindow.openDevTools();
 });
 
 function adicionaIconeDeTray() {
@@ -30,7 +31,7 @@ function adicionaIconeDeTray() {
 }
 
 function criaJanelaPrincipal() {
-    mainWindow = new BrowserWindow({ width: 500, height: 300, show: false });
+    mainWindow = new BrowserWindow({ width: 500, height: 320, show: false });
     mainWindow.loadUrl('file://' + __dirname + '/index.html');    
 
     mainWindow.on('closed', function () {

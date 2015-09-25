@@ -1,11 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using io.js <script>document.write(process.version)</script>
-    and Electron <script>document.write(process.versions['electron'])</script>.
-  </body>
+<head>
+    <title>Ponto</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="header">
+        <div class="title">
+            <h1>Ponto <small>CWI Software</small></h1>
+        </div>
+
+        <div class="user-name">
+            <script>
+                var userName = "";
+                if (process.platform === 'darwin')
+                    userName = process.env['USER']; //Testar no mac
+                else if (process.platform === 'linux')
+                    userName = "Linux"; //TODO
+                else {
+                    var paths = process.env['USERPROFILE'].split("\\");
+                    userName = paths[paths.length - 1];
+                }
+
+                document.write("CWINET\\" + userName);
+            </script>
+        </div>
+    </div>
+
+    <div>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+    </div>
+</body>
 </html>

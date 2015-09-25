@@ -16,6 +16,8 @@ app.on('window-all-closed', function () {
 app.on('ready', function () {
     criaJanelaPrincipal();    
     adicionaIconeDeTray();
+
+    mainWindow.openDevTools();
 });
 
 function adicionaIconeDeTray() {
@@ -29,11 +31,10 @@ function adicionaIconeDeTray() {
 
 function criaJanelaPrincipal() {
     mainWindow = new BrowserWindow({ width: 500, height: 300, show: false });
-    mainWindow.loadUrl('file://' + __dirname + '/index.html');
-
-    mainWindow.openDevTools();
+    mainWindow.loadUrl('file://' + __dirname + '/index.html');    
 
     mainWindow.on('closed', function () {
         mainWindow = null;
     });
 }
+

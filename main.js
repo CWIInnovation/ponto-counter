@@ -4,6 +4,9 @@ var Menu = require('menu');
 var Tray = require('tray');
 var dialog = require('dialog');
 
+var Toaster = require('./toaster/index');
+var toaster = new Toaster();
+
 require('crash-reporter').start();
 
 var mainWindow = null;
@@ -15,7 +18,7 @@ app.on('window-all-closed', function () {
 });
 
 app.on('ready', function () {
-    criaJanelaPrincipal();    
+    criaJanelaPrincipal();
     adicionaIconeDeTray();
 
     //mainWindow.openDevTools();
@@ -27,12 +30,18 @@ function adicionaIconeDeTray() {
 
     appIcon.on('clicked', function () {
         mainWindow.show();
-    });    
+    });
 }
 
 function criaJanelaPrincipal() {
     mainWindow = new BrowserWindow({ width: 500, height: 320, show: false });
-    mainWindow.loadUrl('file://' + __dirname + '/index.html');    
+    toaster.init(mainWindow);
+
+    mainWindow.loadUrl('file://' + __dirname + '/index.html');
+
+    mainWindow.on('devtools-opened', function () {
+        mainWindow.loadUrl('file://' + __dirname + '/index.html');
+    });
 
     mainWindow.on('closed', function () {
         mainWindow = null;
